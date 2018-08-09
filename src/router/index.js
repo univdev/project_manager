@@ -10,12 +10,10 @@ Vue.use(Router);
 
 const store = new Vuex.Store({
   state: {
-    count: 0,
+    me: null,
   },
   mutations: {
-    increment: (state) => {
-      state.count += 1;
-    },
+
   },
 });
 
