@@ -75,7 +75,7 @@ export default {
       this.projects = await this.loadProjects();
     },
     async loadProjects() {
-      const { data } = await this.$http.get('/');
+      const { data } = await this.$http.get('/admin');
       return data;
     },
     redirect(route) {
