@@ -33,7 +33,12 @@
 </style>
 
 <template lang="pug">
-  #projectManager
+  #projectManager(v-loading='isLoading')
+    el-dialog(
+      title='로그인'
+      :visible.sync='modal.login'
+      :append-to-body='true'
+      width='360px')
     .header
       .header-title
         router-link(:to='{ name: `main` }') PROJECT MANAGER
@@ -46,7 +51,7 @@
       transition(
         name='fade'
         mode='out-in')
-        router-view
+        router-view(@loading='loading($event)')
 </template>
 
 <script>
@@ -56,6 +61,7 @@ export default {
       modal: {
         login: false,
       },
+      isLoading: false,
     };
   },
   methods: {
@@ -69,6 +75,9 @@ export default {
           this.modal[key] = false;
         });
       }
+    },
+    loading(status) {
+      this.isLoading = status;
     },
   },
   mounted() {

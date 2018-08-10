@@ -50,7 +50,13 @@ import ProjectComponent from '@/components/project';
 
 export default {
   async mounted() {
-    this.projects = await this.loadProjects();
+    try {
+      this.$emit('loading', true);
+      this.projects = await this.loadProjects();
+      this.$emit('loading', false);
+    } catch (e) {
+      alert(e.response);
+    }
   },
   data() {
     return {
@@ -69,7 +75,8 @@ export default {
       this.projects = await this.loadProjects();
     },
     async loadProjects() {
-      return [];
+      const { data } = await this.$http.get('/');
+      return data;
     },
     redirect(route) {
       this.$router.push(route);
