@@ -5,6 +5,10 @@ import { sync } from 'vuex-router-sync';
 
 import MainLayout from '@/layouts/main';
 
+import Error404Page from '@/pages/errors/404';
+import MainPage from '@/pages/main';
+
+
 Vue.use(Vuex);
 Vue.use(Router);
 
@@ -23,7 +27,10 @@ const router = new Router({
     {
       path: '/',
       component: MainLayout,
-      name: 'main',
+      children: [
+        { path: '/', component: MainPage, name: 'main' },
+        { path: '*', component: Error404Page },
+      ],
     },
   ],
 });
